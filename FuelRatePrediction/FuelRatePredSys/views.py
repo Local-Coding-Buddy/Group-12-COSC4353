@@ -18,8 +18,8 @@ def register(request):
 def profile(request):
 	return render(request, 'FuelRatePredSys/profile.html')
 
-def profile_mangement(request):
-	return render(request, 'FuelRatePredSys/profile_mangement.html')
+def profile_management(request):
+	return render(request, 'FuelRatePredSys/profile_management.html')
 
 def quote_form(request):
 	return render(request, 'FuelRatePredSys/quote_form.html')
