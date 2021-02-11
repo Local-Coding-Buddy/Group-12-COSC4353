@@ -17,3 +17,12 @@ def register(request):
 
 def profile(request):
 	return render(request, 'FuelRatePredSys/profile.html')
+
+def profile_mangement(request):
+	return render(request, 'FuelRatePredSys/profile_mangement.html')
+
+def quote_form(request):
+	return render(request, 'FuelRatePredSys/quote_form.html')
+
+def quote_history(request):
+	return render(request, 'FuelRatePredSys/quote_history.html')
