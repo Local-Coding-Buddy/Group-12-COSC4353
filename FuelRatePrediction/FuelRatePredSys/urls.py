@@ -11,5 +11,6 @@ urlpatterns = [
     path("register/", views.register, name='register'),
     path("profile/",views.profile, name ='profile'),
     path("profile_management/",views.profile_management, name ='profile_management'),
+    path('fqh/', views.quote_history, name='FuelRatePredSys-fqh'),
 
 ]

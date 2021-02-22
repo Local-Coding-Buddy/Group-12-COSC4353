@@ -1,0 +1,50 @@
+
+
+
+{% block content %}
+<br><br><br>
+<h1>Fuel Quote History</h1>
+
+<head>
+    <style>
+        #customers {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #customers td,
+        #customers th {
+            border: 3px solid #ddd;
+            padding: 8px;
+        }
+
+        #customers tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #customers tr:hover {
+            background-color: #ddd;
+        }
+
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: lightseagreen;
+            color: Black;
+        }
+    </style>
+</head>
+<table id="customers" style="width:158%">
+    <tr>
+        <th>Gallons Requested</th>
+        <th>Delivery Date</th>
+        <th>Delivery Address</th>
+        <th>Suggested price</th>
+        <th>Total Due</th>
+    </tr>
+
+    
+</table>
+{% endblock %}
