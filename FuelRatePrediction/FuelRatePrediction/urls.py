@@ -15,8 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from FuelRatePredSys import views as v
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('FuelRatePredSys.urls')),
+    path("loginHome/", v.loginHome, name="Home"),
+    path('', include("django.contrib.auth.urls")),
 ]
