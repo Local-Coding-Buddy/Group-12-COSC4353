@@ -2,6 +2,7 @@
 
 
 {% block content %}
+{% csrf_token %} 
 <br><br><br>
 <h1>Fuel Quote History</h1>
 
@@ -38,6 +39,7 @@
         
     </style>
 </head>
+
 <table id="customers" style="width:100%">
     <tr>
         <th>Gallons Requested</th>
@@ -46,15 +48,15 @@
         <th>Suggested price</th>
         <th>Total Due</th>
     </tr>
-
+{% for Fuel_Quote in UserProfile.Fuel_Quote_set.all %}
     <tr>
-        <td>150</td>
-        <td>February 28th, 2021</td>
-        <td>2912 ThatWay Dr</td>
-        <td>$1.89</td>
-        <td>$283.50</td>
+        <td>{{ Fuel_Quote.gallons }}</td>
+        <td>{{ Fuel_Quote.delivery_Date }}</td>
+        <td>{{ Fuel_Quote.delivery_address }}</td>
+        <td>{{ Fuel_Quote.s_price }}</td>
+        <td>{{ Fuel_Quote.t_price }}</td>
     </tr>
-
+{% endfor %}
     <tr>
         <td>50</th>
         <td>March 3rd, 2021</td>

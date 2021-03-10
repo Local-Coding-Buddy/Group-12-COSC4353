@@ -26,4 +26,16 @@ class Migration(migrations.Migration):
                 ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
+        migrations.CreateModel(
+            name='Fuel_Quote',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('gallons', models.IntegerField(default=0)),
+                ('delivery_date',models.DateField(auto_now=False,auto_now_add=False)),
+                ('delivery_address', models.CharField(default='', max_length=100)),
+                ('s_price', models.DecimalField(max_digits=10,decimal_places=2)),#suggested Price
+                ('t_price', models.DecimalField(max_digits=10,decimal_places=2)),#total price
+                ('userprofile', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='UserProfile')),#keep lowercase F it has to do with app name in urls
+            ],# was thinking about adding a foriegn key (user probably) need to ask jafar about it
+        ),
     ]

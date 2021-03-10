@@ -1,4 +1,6 @@
 
+
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -44,9 +46,10 @@
     <title>Fuel Quote Form</title>
 </head>
 
-{% extends 'base.html'%}
+{% extends "FuelRatePredSys/base.html"%}
 
 {% block content %}
+{% csrf_token %}
 <body>
     
 
