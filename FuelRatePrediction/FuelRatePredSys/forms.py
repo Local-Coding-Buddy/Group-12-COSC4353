@@ -34,3 +34,5 @@ class EditProfileForm(UserChangeForm):
 		model = UserProfile
 		fields = ('fullname', 'address', 'city', 'state', 'zipcode')
 
+
+
