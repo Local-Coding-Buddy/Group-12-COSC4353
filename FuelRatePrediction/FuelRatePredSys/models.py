@@ -14,7 +14,7 @@ class UserProfile(models.Model):
 	def __str__(self):
 		return self.user.username
 
-class Fuel_Quote(models.Model):
+class Pricing_Module(models.Model):
 	userprofile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
 	gallons = models.IntegerField(default=0)
 	delivery_date = models.DateField(auto_now=False,auto_now_add=False)
@@ -23,5 +23,5 @@ class Fuel_Quote(models.Model):
 	t_price = models.DecimalField(max_digits=10,decimal_places=2)
 	
 	def __str__(self):
-		return self.t_price
+		return self.userprofile.user.username
 

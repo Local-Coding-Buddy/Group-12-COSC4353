@@ -2,6 +2,7 @@
   body {
       align-self: center;
       background-color: lightblue;
+      margin-top: 5%;
   }
 
   form {
@@ -32,6 +33,9 @@
       padding-left: 5%;
   }
 
+  nav{
+      padding-bottom: 2000;
+  }
   td,
   th {
       border: 1px solid #dddddd;

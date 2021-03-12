@@ -7,7 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 import datetime
 from django.forms import ModelForm
 
-from .models import UserProfile
+from .models import UserProfile, Pricing_Module
 
 class RegisterForm(UserCreationForm):
 

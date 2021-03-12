@@ -1,9 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from .forms import RegisterForm
 from django.contrib.auth.decorators import login_required
 from .forms import RegisterForm, UserProfileFrom 
+
+from .models import UserProfile, Pricing_Module
 
 def index(request):
 	return render(request, 'FuelRatePredSys/home.html')
@@ -43,8 +45,10 @@ def profile(request):
 def profile_management(request):
 	return render(request, 'FuelRatePredSys/profile_management.html')
 
-def quote_form(request):
+def quote_form(request):#, user_id):
+	#uid = get_object_or_404(UserProfile, pk=user_id)
 	return render(request, 'FuelRatePredSys/quote_form.html')
 
-def quote_history(request):
+def quote_history(request,):
+	#uid = get_object_or_404(UserProfile, pk=user_id)
 	return render(request, 'FuelRatePredSys/quote_history.html')

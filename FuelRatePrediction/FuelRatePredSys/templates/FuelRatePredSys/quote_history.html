@@ -48,7 +48,7 @@
         <th>Suggested price</th>
         <th>Total Due</th>
     </tr>
-{% for Fuel_Quote in UserProfile.Fuel_Quote_set.all %}
+{% for Fuel_Quote in userprofile.Fuel_Quote_set.all %}
     <tr>
         <td>{{ Fuel_Quote.gallons }}</td>
         <td>{{ Fuel_Quote.delivery_Date }}</td>
