@@ -43,20 +43,6 @@ def profile(request):
 	args = {'user': request.user}
 	return render(request, 'FuelRatePredSys/profile.html', args)
 
-def profile_management(request):
-	if request.method =='POST':
-		form = EditProfileForm(request.POST, instance=request.user)
-		p_form = EditProfileForm(request.POST, instance=request.user.userprofile)
-		if form.is_valid() and p_form.is_valid():
-			form.save()
-			p_form.save()
-			return redirect('/profile')
-
-	else:
-		form = EditProfileForm(instance=request.user)
-		p_form = EditProfileForm(request.POST, instance=request.user.userprofile)
-		args = {'form':form, 'p_form':p_form}
-		return render(request, 'FuelRatePredSys/profile_management.html', args)
 
 def quote_form(request):#, user_id):
 	#uid = get_object_or_404(UserProfile, pk=user_id)
