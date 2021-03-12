@@ -70,4 +70,4 @@ def profile_management(request):
         form = EditProfileForm(instance=request.user)
         p_form = EditProfileForm(request.POST, instance=request.user.userprofile)
         args = {'form':form, 'p_form':p_form}
-        return render(request, 'FuelRatePredSys/editProfile.html', args)
+        return render(request, 'FuelRatePredSys/profile_management.html', args)
