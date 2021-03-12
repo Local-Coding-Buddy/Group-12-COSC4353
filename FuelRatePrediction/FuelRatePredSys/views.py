@@ -64,7 +64,7 @@ def editProfile(request):
         if form.is_valid() and p_form.is_valid():
             form.save()
             p_form.save()
-            return redirect('/clientProfile')
+            return redirect('/profile')
 
     else:
         form = EditProfileForm(instance=request.user)
