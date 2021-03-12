@@ -57,7 +57,7 @@ def profile(request):
     args = {'user': request.user}
     return render(request, 'FuelRatePredSys/profile.html', args)
 	
-def editProfile(request):
+def profile_management(request):
     if request.method =='POST':
         form = EditProfileForm(request.POST, instance=request.user)
         p_form = EditProfileForm(request.POST, instance=request.user.userprofile)
