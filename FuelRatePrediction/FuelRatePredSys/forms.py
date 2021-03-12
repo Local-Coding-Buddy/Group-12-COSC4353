@@ -27,3 +27,10 @@ class UserProfileFrom(forms.ModelForm):
 	class Meta:
 		model = UserProfile
 		fields = ('fullname', 'address', 'city', 'state', 'zipcode')
+
+
+class EditProfileForm(UserChangeForm):
+	class Meta:
+		model = UserProfile
+		fields = ('fullname', 'address', 'city', 'state', 'zipcode')
+

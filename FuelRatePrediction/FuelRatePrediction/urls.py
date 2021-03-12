@@ -22,4 +22,11 @@ urlpatterns = [
     path('', include('FuelRatePredSys.urls')),
     path("loginHome/", v.loginHome, name="Home"),
     path('', include("django.contrib.auth.urls")),
+    path("profile_management/", v.profile_management, name="editProfile"),
+    path("profile/", v.profile, name="profile"),
+    path("clientRegistration/", v.register, name="clientRegistration"),
+    path('success/', include('FuelRatePredSys.urls')),
+
+
+
 ]
