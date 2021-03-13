@@ -1,8 +1,8 @@
+{% extends "FuelRatePredSys/main_loggedin.html"%}
 
-
+{% load crispy_forms_tags %}
 
 {% block content %}
-{% csrf_token %} 
 <br><br><br>
 <h1>Fuel Quote History</h1>
 
@@ -35,12 +35,9 @@
             background-color: lightseagreen;
             color: Black;
         }
-
-        
     </style>
 </head>
-
-<table id="customers" style="width:100%">
+<table id="customers" style="width:158%">
     <tr>
         <th>Gallons Requested</th>
         <th>Delivery Date</th>
@@ -48,38 +45,20 @@
         <th>Suggested price</th>
         <th>Total Due</th>
     </tr>
-{% for Fuel_Quote in userprofile.Fuel_Quote_set.all %}
-    <tr>
-        <td>{{ Fuel_Quote.gallons }}</td>
-        <td>{{ Fuel_Quote.delivery_Date }}</td>
-        <td>{{ Fuel_Quote.delivery_address }}</td>
-        <td>{{ Fuel_Quote.s_price }}</td>
-        <td>{{ Fuel_Quote.t_price }}</td>
-    </tr>
-{% endfor %}
-    <tr>
-        <td>50</th>
-        <td>March 3rd, 2021</td>
-        <td>5687 ThisWay Ln</td>
-        <td>$1.89</td>
-        <td>$94.50</td>
-    </tr>
 
-      <tr>
-        <td>200</td>
-        <td>June 7th, 2021</td>
-        <td>0862 ParkWay Rd</td>
-        <td>$1.89</td>
-        <td>$378</td>
-    </tr>
+    <form method="post" class="from-group">
+        {% csrf_token %}
+        {{ history_list.as_table }}
 
-       <tr>
-        <td>3668</td>
-        <td>October 9th, 2021</td>
-        <td>0862 Houston Dr Rd</td>
-        <td>$1.89</td>
-        <td>$6932.52</td>
-    </tr>
-    
+        {% for PriceHistory in history_list %}
+        <tr>
+            <td align="left">{{ PriceHistory.gallons_requested}}</td>
+            <td align="left">{{ PriceHistory.delivery_date }}</td>
+            <td align="left">{{ PriceHistory.delivery_address }}</td>
+            <td align="left">{{ PriceHistory.suggested_price }}</td>
+            <td align="left">{{ PriceHistory.total_due}}</td>
+        </tr>
+        {% endfor %}
+    </form>
 </table>
 {% endblock %}
