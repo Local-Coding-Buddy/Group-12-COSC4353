@@ -35,4 +35,7 @@ class EditProfileForm(UserChangeForm):
 		fields = ('fullname', 'address', 'city', 'state', 'zipcode')
 
 
-
+class QuoteHistory(forms.ModelForm):
+	class Meta:
+		model = Pricing_Module
+		fields = ('gallons','delivery_date','delivery_date','s_price','t_price')

@@ -52,7 +52,7 @@
 {% block content %}
 {% csrf_token %}
 <body>
-    
+<br><br><br>  
 
 
     <h1>Get a Quote!</h1>
@@ -69,7 +69,7 @@
         </div>-->
         <!---Input address of user here-->
         <div class="form-group">
-            <label>Delivery Address: {{ userprofile.address }}</label>
+            <label>Delivery Address: {{ user.userprofile.address }}</label>
             <!-- <input id="Address_fq1" type="text" placeholder="123 Fake Street 77024 Houston, TX "> -->
         </div>
         <label for="start">Choose delivery date:</label>

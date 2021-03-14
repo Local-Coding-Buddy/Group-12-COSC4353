@@ -3,8 +3,8 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from .forms import RegisterForm
 from django.contrib.auth.decorators import login_required
-from .forms import RegisterForm, UserProfileFrom, EditProfileForm
-
+from .forms import RegisterForm, UserProfileFrom, EditProfileForm, QuoteHistory
+import logging
 from .models import UserProfile, Pricing_Module
 
 def index(request):
@@ -46,12 +46,16 @@ def profile(request):
 
 
 def quote_form(request):#, user_id):
+	args = {'user': request.user}
 	#uid = get_object_or_404(UserProfile, pk=user_id)
-	return render(request, 'FuelRatePredSys/quote_form.html')
+	return render(request, 'FuelRatePredSys/quote_form.html', args)
 
-def quote_history(request,):
-	#uid = get_object_or_404(UserProfile, pk=user_id)
-	return render(request, 'FuelRatePredSys/quote_history.html')
+def quote_history(request):
+	#args = {'form':form}
+	args=get_object_or_404(UserProfile, pk=request.user.id)
+	#args = {'user': request.user}
+	#args = get_object_or_404(UserProfile, pk=request.user.id)
+	return render(request, 'FuelRatePredSys/quote_history.html', {'userprofile':args})
 
 def profile(request):
     args = {'user': request.user}
