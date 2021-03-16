@@ -48,33 +48,29 @@
 </head>
 
 {% extends "FuelRatePredSys/loginHome.html"%}
-
+{% load crispy_forms_tags %}
 {% block content %}
-{% csrf_token %}
+
 <body>
 <br><br><br>  
 
 
     <h1>Get a Quote!</h1>
     <hr>
-    <form align="center">
+    <form align="center", action="/receipt/", method = "get">
+        {% csrf_token %}
         <div class="form-group">
             <label for="gallons">Enter Gallons Requested:</label>
-            <input type="number" class="gallons" id="gallons" name="gallons" placeholder="Enter gallons">
+            <input type="number" class="gallons" id="gallons" name="gallons" placeholder="Enter gallons" value = "{{form.gallons}}">
         </div>
-        <!-- <div class="form-group">
-            <label>Address: </label>
-            <p> 123 Fake Street 77024 Houston, TX
-            </p>
-        </div>-->
-        <!---Input address of user here-->
+       
         <div class="form-group">
             <label>Delivery Address: {{ user.userprofile.address }}</label>
             <!-- <input id="Address_fq1" type="text" placeholder="123 Fake Street 77024 Houston, TX "> -->
         </div>
         <label for="start">Choose delivery date:</label>
-        <input type="date" id="date" name="date">
-        </div>
+        <input type="date" id="date" name="date" value = "{{form.delivery_date}}">
+        
         <div class="form-group">
             <label class="Suggested Price">Suggested price/gallon: $1.89</label>
             <!---numeric non-editable, price will be calculated by Pricing Module - we are not building pricing module yet-->
@@ -83,7 +79,7 @@
     </form>
     <hr>
     <div class = "AD" align="center">
-        <h2>Amount due: <span style="color: red;">$189</span></h2>
+        <!-- <h2>Amount due: <span style="color: red;"></span></h2> -->
         
     </div>
 </body>

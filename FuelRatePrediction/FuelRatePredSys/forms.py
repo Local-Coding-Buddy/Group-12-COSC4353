@@ -38,4 +38,18 @@ class EditProfileForm(UserChangeForm):
 class QuoteHistory(forms.ModelForm):
 	class Meta:
 		model = Pricing_Module
-		fields = ('gallons','delivery_date','delivery_date','s_price','t_price')
+		fields = ('gallons','delivery_date','delivery_address','s_price','t_price')
+		# gallons = forms.IntegerField()
+		# delivery_date = forms.DateField()
+		# delivery_address = forms.CharField(max_length=100)
+		# s_price = forms.DecimalField(max_digits=10,decimal_places=2)
+		# t_price = forms.DecimalField(max_digits=10,decimal_places=2)
+
+class Quote(forms.ModelForm):
+	class Meta:
+		model = Pricing_Module
+		fields = ('gallons','delivery_date')
+		# gallons = forms.IntegerField(label = 'Number of Gallons')
+		# delivery_date = forms.DateField()
+		# delivery_address = forms.CharField(max_length=100)
+

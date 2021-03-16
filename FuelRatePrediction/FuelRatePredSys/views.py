@@ -1,9 +1,8 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
-from .forms import RegisterForm
 from django.contrib.auth.decorators import login_required
-from .forms import RegisterForm, UserProfileFrom, EditProfileForm, QuoteHistory
+from .forms import RegisterForm, UserProfileFrom, EditProfileForm, QuoteHistory, Quote
 import logging
 from .models import UserProfile, Pricing_Module
 
@@ -46,7 +45,10 @@ def profile(request):
 
 
 def quote_form(request):#, user_id):
-	args = {'user': request.user}
+	form = Quote(request.POST, instance=request.user)
+	p_form = Quote(request.POST, instance = request.user.userprofile)
+	#args = {'user': request.user}
+	args = {'form':form, 'p_form':p_form}
 	#uid = get_object_or_404(UserProfile, pk=user_id)
 	return render(request, 'FuelRatePredSys/quote_form.html', args)
 
@@ -75,3 +77,10 @@ def profile_management(request):
         p_form = EditProfileForm(request.POST, instance=request.user.userprofile)
         args = {'form':form, 'p_form':p_form}
         return render(request, 'FuelRatePredSys/profile_management.html', args)
+
+def receipt(request):
+	form = QuoteHistory(request.POST, instance=request.user)
+	p_form = QuoteHistory(request.POST, instance = request.user.userprofile)
+	#args = {'user': request.user}
+	args = {'form':form, 'p_form':p_form}
+	return render(request, 'FuelRatePredSys/receipt.html', args)
