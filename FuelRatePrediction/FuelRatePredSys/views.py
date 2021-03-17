@@ -54,7 +54,7 @@ def quote_form(request):#, user_id):
 
 def quote_history(request):
 	#args = {'form':form}
-	args=get_object_or_404(UserProfile, pk=request.user.id)
+	args=get_object_or_404(UserProfile, pk=request.user.UserProfile.id)
 	#args = {'user': request.user}
 	#args = get_object_or_404(UserProfile, pk=request.user.id)
 	return render(request, 'FuelRatePredSys/quote_history.html', {'userprofile':args})

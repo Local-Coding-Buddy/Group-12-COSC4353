@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recipet</title>
+    <title>Reciept</title>
     <style>
         body {
             text-align: center;
@@ -66,11 +66,16 @@
     </div>
     </hr>
     <form action="post" class="form-group">
-        {% with form.gallons = request.GET.gallons%}
-    {% with form.delivery_date = request.GET.date%}
-    {% with form.delivery_address = user.userprofile.address%}
-    {% with form.s_price = 2%}
-    {% with form.t_price = widthratio request.GET.gallons 1 2%}
+        {{ form.non_gallons_errors }}
+        {{ form.gallons.errors }}
+           <label for="{{ form.gallons.id_for_label }}"> {{request.GET.gallons}} </label>
+        {{ form.gallons }}
+    <script>
+        document.getElementById("id_delivery_address").value = "{{ user.userprofile.address }} {{ user.userprofile.city }} {{ user.userprofile.state }}";
+        document.getElementById("id_gallons").readOnly = true;
+        document.getElementById("id_delivery_address").readOnly = true;
+        document.getElementById("id_total_due").readOnly = true;
+    </script>
     
     <button type="submit" class="btn btn-primary">Submit</button>
     </form>
