@@ -1,97 +1,55 @@
+{% extends "FuelRatePredSys/base_loggedin.html"%}
 
-
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-<style>
-    body {
-        text-align: center;
-        background-color: skyblue;
-    }
-
-    form {
-        background-color: #b0d1f0e8;
-        padding: 1%;
-    }
-
-    input {
-        padding: 12px 20px;
-        margin: 8px 0;
-        box-sizing: border-box;
-        border: none;
-        border-bottom: 2px solid red;
-        background-color: beige;
-    }
-
-    label,
-    p {
-        font-size: large;
-        font-weight: 500;
-        padding-left: 2px;
-        padding-right: 2px;
-        border: none;
-    }
-
-    h1 {
-        padding-left: 5%;
-        font-size: 100px;
-        text-align: center;
-    }
-</style>
-
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Fuel Quote Form</title>
-</head>
-
-{% extends "FuelRatePredSys/loginHome.html"%}
 {% load crispy_forms_tags %}
 {% block content %}
+<!DOCTYPE html>
+<br><br><br>
+<h1>Get a Quote!</h1>
+<form method="POST" action="/fqf/">
+    {% csrf_token %}
+    {{form|crispy}}
 
-<body>
-<br><br><br>  
+    <script>
+        document.getElementById("id_delivery_address").value = "{{ user.userprofile.address }} {{ user.userprofile.city }} {{ user.userprofile.state }}";
+        document.getElementById("id_suggested_price").readOnly = true;
+        document.getElementById("id_delivery_address").readOnly = true;
+        document.getElementById("id_total_price").readOnly = true;
+    </script>
 
+    <button type="button" onclick="calculate()" style="margin:10px;height:50px;width:200px" ,
+        class='btn btn-success'>Get Quote</button>
+    <script>
+        function calculate() {
+            var gallons = document.getElementById("id_gallons_requested").value;
+            if (gallons > 1000) {
+                var gallon_requested_Factor = 0.02;
+            } else {
+                gallon_requested_Factor = 0.03;
+            }
+            var location = "{{ user.userprofile.state }}"
+            if (location == "TX") {
+                var location_fact = 0.02
+            } else {
+                location_fact = 0.04
+            }
 
-    <h1>Get a Quote!</h1>
-    <hr>
-    <form align="center", action="/receipt/", method = "get">
-        {% csrf_token %}
-        <div class="form-group">
-            <label for="gallons">Enter Gallons Requested:</label>
-            <input type="number" class="gallons" id="gallons" name="gallons" placeholder="Enter gallons" value = "{{form.gallons}}">
-        </div>
-       
-        <div class="form-group">
-            <label>Delivery Address: {{ user.userprofile.address }}</label>
-            <!-- <input id="Address_fq1" type="text" placeholder="123 Fake Street 77024 Houston, TX "> -->
-        </div>
-        <label for="start">Choose delivery date:</label>
-        <input type="date" id="date" name="date" value = "{{form.delivery_date}}">
-        
-        <div class="form-group">
-            <label class="Suggested Price">Suggested price/gallon: $1.89</label>
-            <!---numeric non-editable, price will be calculated by Pricing Module - we are not building pricing module yet-->
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-    <hr>
-    <div class = "AD" align="center">
-        <!-- <h2>Amount due: <span style="color: red;"></span></h2> -->
-        
-    </div>
-</body>
-{% endblock %}
-</html>
+            var History = "{{ history_list1|length }}"
+            if (History > 0) {
+                var history_factor = 0.01
+            } else {
+                var history_factor = 0.0
+            }
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-    crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
+            var company_profit = 0.1
+            var margin = 1.50 * (location_fact - history_factor + gallon_requested_Factor + company_profit)
+            var Suggested_Price = 1.50 + margin;
+            var Total = Suggested_Price * gallons;
+
+            document.getElementById("id_suggested_price").value = Suggested_Price;
+            document.getElementById("id_total_price").value = Total;
+
+        } 
+    </script>
+    <button type="submit" , style="margin:10px;height:50px;width:200px" , class='btn btn-success'>Submit</button>
+</form>
+{% endblock content %}

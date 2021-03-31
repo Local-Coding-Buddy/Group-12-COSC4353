@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-from .forms import RegisterForm, UserProfileFrom, EditProfileForm, QuoteHistory, Quote
+from .forms import RegisterForm, UserProfileFrom, EditProfileForm, FuelHistoryPage, FuelQuoteHistory 
 import logging
 from .models import UserProfile, Pricing_Module
 
@@ -44,20 +44,26 @@ def profile(request):
 
 
 
-def quote_form(request):#, user_id):
-	form = Quote(request.POST, instance=request.user)
-	p_form = Quote(request.POST, instance = request.user.userprofile)
-	#args = {'user': request.user}
-	args = {'form':form, 'p_form':p_form}
-	#uid = get_object_or_404(UserProfile, pk=user_id)
-	return render(request, 'FuelRatePredSys/quote_form.html', args)
+def quote_form(request):
+	history_list1 = Pricing_Module.objects.filter(user=request.user)
+	if request.method == 'POST':
+		form = FuelQuoteHistory(request.POST)
+		if form.is_valid():
+			form.save(commit=False)
+			form.instance.user = request.user
+			form.save()
+			args = {"form":form, "history_list1":history_list1}
+			return render(request, 'FuelRatePredSys/quote_form.html', args )
+	else:
+		form = FuelQuoteHistory()
+	return render(request, 'FuelRatePredSys/quote_form.html', {"form":form, "history_list1":history_list1})
 
 def quote_history(request):
-	#args = {'form':form}
-	args=get_object_or_404(UserProfile, pk=request.user.UserProfile.id)
-	#args = {'user': request.user}
-	#args = get_object_or_404(UserProfile, pk=request.user.id)
-	return render(request, 'FuelRatePredSys/quote_history.html', {'userprofile':args})
+	form = FuelHistoryPage()
+	history_list = Pricing_Module.objects.filter(user=request.user)
+	args ={'history_list': history_list}
+	return render(request, 'FuelRatePredSys/quote_history.html', args)
+
 
 def profile(request):
     args = {'user': request.user}
@@ -78,9 +84,11 @@ def profile_management(request):
         args = {'form':form, 'p_form':p_form}
         return render(request, 'FuelRatePredSys/profile_management.html', args)
 
-def receipt(request):
-	form = QuoteHistory(request.POST, instance=request.user)
-	p_form = QuoteHistory(request.POST, instance = request.user.userprofile)
-	#args = {'user': request.user}
-	args = {'form':form, 'p_form':p_form}
-	return render(request, 'FuelRatePredSys/receipt.html', args)
+
+
+# def receipt(request):
+# 	form = QuoteHistory(request.POST, instance=request.user)
+# 	p_form = QuoteHistory(request.POST, instance = request.user.userprofile)
+# 	#args = {'user': request.user}
+# 	args = {'form':form, 'p_form':p_form}
+# 	return render(request, 'FuelRatePredSys/receipt.html', args)

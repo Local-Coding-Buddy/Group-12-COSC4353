@@ -13,6 +13,6 @@ urlpatterns = [
     path("profile_management/",views.profile_management, name ='profile_management'),
     path('fqh/', views.quote_history, name='FuelRatePredSys-fqh'),
     path('fqf/', views.quote_form, name='FuelRatePredSys-fqf'),
-    path('receipt/', views.receipt, name='receipt'),
+    # path('receipt/', views.receipt, name='receipt'),
 
 ]

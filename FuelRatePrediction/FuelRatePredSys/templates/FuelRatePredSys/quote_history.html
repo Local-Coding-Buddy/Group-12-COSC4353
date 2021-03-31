@@ -1,4 +1,4 @@
-{% extends "FuelRatePredSys/main_loggedin.html"%}
+{% extends "FuelRatePredSys/base_loggedin.html"%}
 
 {% load crispy_forms_tags %}
 
@@ -45,36 +45,20 @@
         <th>Suggested price</th>
         <th>Total Due</th>
     </tr>
-   
-    {% for s in user.userprofile.pricing_module_set.all %}
-    <tr>
-        <td>{{ s.gallons }}</td>
-        <td>{{ s.delivery_date }}</td>
-        <td>{{ s.delivery_address  }}</td>
-        <td>{{ s.s_price }}</td>
-        <td>{{ s.t_price }}</td>
-    </tr>
-        {% endfor %}
-    {% if error_message %}
-    <p class="alert alert-danger">
-        <strong>{{ error_message }}</strong>
-    </p>
-    {% endif %}
+
     <form method="post" class="from-group">
         {% csrf_token %}
-        <!-- {{ history_list.as_table }} -->
-        {{form|crispy}}
+        {{ history_list.as_table }}
 
-        
-        <!-- {% for PriceHistory in history_list %}
+        {% for PriceHistory in history_list %}
         <tr>
             <td align="left">{{ PriceHistory.gallons_requested}}</td>
             <td align="left">{{ PriceHistory.delivery_date }}</td>
             <td align="left">{{ PriceHistory.delivery_address }}</td>
             <td align="left">{{ PriceHistory.suggested_price }}</td>
-            <td align="left">{{ PriceHistory.total_due}}</td>
+            <td align="left">{{ PriceHistory.total_price}}</td>
         </tr>
-        {% endfor %} -->
+        {% endfor %}
     </form>
 </table>
 {% endblock %}

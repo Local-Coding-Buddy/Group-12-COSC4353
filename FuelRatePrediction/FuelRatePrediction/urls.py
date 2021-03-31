@@ -26,6 +26,8 @@ urlpatterns = [
     path("profile/", v.profile, name="profile"),
     path("clientRegistration/", v.register, name="clientRegistration"),
     path('success/', include('FuelRatePredSys.urls')),
+    path('fqf/', v.quote_form, name="fuelQuoteForm"),
+    path('fqh/', v.quote_history, name="fuelQuoteHistory"),
 
 
 

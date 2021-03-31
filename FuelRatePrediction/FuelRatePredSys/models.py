@@ -15,13 +15,13 @@ class UserProfile(models.Model):
 		return self.user.username
 
 class Pricing_Module(models.Model):
-	userprofile = models.ForeignKey(UserProfile,on_delete=models.CASCADE)
-	gallons = models.IntegerField(default=0)
-	delivery_date = models.DateField(auto_now=False,auto_now_add=False)
-	delivery_address = models.CharField(default='', max_length=100)
-	s_price = models.DecimalField(max_digits=10,decimal_places=2)
-	t_price = models.DecimalField(max_digits=10,decimal_places=2)
+	user = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+	gallons_requested = models.IntegerField()
+	delivery_date = models.DateField()
+	delivery_address = models.CharField(max_length=100)
+	suggested_price = models.FloatField()
+	total_price = models.FloatField()
 	
 	def __str__(self):
-		return self.userprofile.user.username
+		return self.user.username
 

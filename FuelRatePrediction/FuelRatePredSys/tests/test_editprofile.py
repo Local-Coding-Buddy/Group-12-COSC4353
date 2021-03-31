@@ -22,8 +22,8 @@ class TestEditProfileForm(TestCase):
         #test valid data
         valid_data = {
 
-          "fullname" : "Imtiaz",
-          "address" : "2111 Holly Hall",
+          "fullname" : "Tom",
+          "address" : "1111 Cullen ST",
           "city" : "Houston",
           "state" : "OTHERS",
           "zipcode" : "77045"

@@ -34,22 +34,38 @@ class EditProfileForm(UserChangeForm):
 		model = UserProfile
 		fields = ('fullname', 'address', 'city', 'state', 'zipcode')
 
+class DateInput(forms.DateInput):
+    input_type = 'date'
 
-class QuoteHistory(forms.ModelForm):
+class FuelQuoteHistory(forms.ModelForm):
 	class Meta:
 		model = Pricing_Module
-		fields = ('gallons','delivery_date','delivery_address','s_price','t_price')
-		# gallons = forms.IntegerField()
-		# delivery_date = forms.DateField()
-		# delivery_address = forms.CharField(max_length=100)
-		# s_price = forms.DecimalField(max_digits=10,decimal_places=2)
-		# t_price = forms.DecimalField(max_digits=10,decimal_places=2)
+		fields = ['gallons_requested',  'delivery_date', 'delivery_address','suggested_price', 'total_price']
+		widgets = {
+		            'delivery_date': DateInput(),
+		        }
 
-class Quote(forms.ModelForm):
+	def save(self, commit=True):
+		user = super().save(commit=False)
+		user.gallons_requested = self.cleaned_data['gallons_requested']
+		user.delivery_date = self.cleaned_data['delivery_date']
+		user.delivery_address = self.cleaned_data['delivery_address']
+		user.suggested_price = self.cleaned_data['suggested_price']
+		user.total_due = self.cleaned_data['total_price']
+		if commit:
+			user.save()
+		return user
+
+	def clean_delivery_date(self):
+		data = self.cleaned_data['delivery_date']
+		if data < datetime.date.today():
+			raise ValidationError(_('Invalid date - Date must be in the future'))
+		return data
+
+class FuelHistoryPage(forms.ModelForm):
+	post = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control','placeholder': 'Write a post...'}))
 	class Meta:
 		model = Pricing_Module
-		fields = ('gallons','delivery_date')
-		# gallons = forms.IntegerField(label = 'Number of Gallons')
-		# delivery_date = forms.DateField()
-		# delivery_address = forms.CharField(max_length=100)
+		fields = ['gallons_requested',]
+
 
