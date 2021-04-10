@@ -53,7 +53,8 @@ def quote_form(request):
 			form.instance.user = request.user
 			form.save()
 			args = {"form":form, "history_list1":history_list1}
-			return render(request, 'FuelRatePredSys/quote_form.html', args )
+			#return render(request, 'FuelRatePredSys/quote_form.html', args )
+			return redirect("/fqh")
 	else:
 		form = FuelQuoteHistory()
 	return render(request, 'FuelRatePredSys/quote_form.html', {"form":form, "history_list1":history_list1})
@@ -83,4 +84,6 @@ def profile_management(request):
         p_form = EditProfileForm(request.POST, instance=request.user.userprofile)
         args = {'form':form, 'p_form':p_form}
         return render(request, 'FuelRatePredSys/profile_management.html', args)
+
+
 
