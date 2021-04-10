@@ -1,6 +1,6 @@
 import unittest
 from django.test import TestCase
-from fuelpredictionsystem.forms import FuelQuoteHistory
+from FuelRatePredSys.forms import FuelQuoteHistory
 
 
 
