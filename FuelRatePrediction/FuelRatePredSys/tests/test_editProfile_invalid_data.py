@@ -7,7 +7,7 @@ from FuelRatePredSys.forms import EditProfileForm
 
 class TestEditProfileForm(TestCase):
   
-	def test_registration_form(self):
+	def test_registration_form_invalid(self):
     	# test invalid data
 	    invalid_data = {
 		  "email" : "",
@@ -18,19 +18,7 @@ class TestEditProfileForm(TestCase):
 	    form = EditProfileForm(data=invalid_data)
 	    form.is_valid()
 	    self.assertTrue(form.errors)
-
-	    #test valid data
-	    valid_data = {
-		  
-		  "fullname" : "Manny",
-		  "address" : "2312 Cullen St",
-		  "city" : "Houston",
-		  "state" : "OTHERS",
-		  "zipcode" : "77077"
-	    }
-	    form = EditProfileForm(data=valid_data)
-	    form.is_valid()
-	    self.assertFalse(form.errors)
-
+	
+	
 
 
