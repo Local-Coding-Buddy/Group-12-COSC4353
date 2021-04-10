@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reciept</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: skyblue;
+        }
+    
+        form {
+            background-color: #b0d1f0e8;
+            padding: 1%;
+        }
+    
+        input {
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: none;
+            border-bottom: 2px solid red;
+            background-color: beige;
+        }
+    
+        label,
+        p {
+            font-size: large;
+            font-weight: 500;
+            padding-left: 2px;
+            padding-right: 2px;
+            border: none;
+        }
+    
+        h1 {
+            padding-left: 5%;
+            font-size: 100px;
+            text-align: center;
+        }
+    </style>
+</head>
+{% extends "FuelRatePredSys/loginHome.html"%}
+  
+{% csrf_token %}
+{% block content %}
+<body>
+    <br><br><br>
+    <h1>Finalize Your Quote</h1>
+    <hr>
+    <div class="form-group">
+        <label for="gallons">Enter Gallons Requested: {{request.GET.gallons}}</label>
+    </div>
+   
+    <div class="form-group">
+        <label>Delivery Address: {{ user.userprofile.address }}</label>
+        <!-- <input id="Address_fq1" type="text" placeholder="123 Fake Street 77024 Houston, TX "> -->
+    </div>
+    <label for="start">Choose delivery date: {{request.GET.date}}</label>
+    
+    <div class="form-group">
+        <br><br><br><br><br><br>
+        <label class="Suggested Price">Suggested price/gallon: $2</label>
+        <label class="Suggested Price">Total Price: {%widthratio request.GET.gallons 1 2%}</label>
+        <!---numeric non-editable, price will be calculated by Pricing Module - we are not building pricing module yet-->
+    </div>
+    </hr>
+    <form action="post" class="form-group">
+        {{ form.non_gallons_errors }}
+        {{ form.gallons.errors }}
+           <label for="{{ form.gallons.id_for_label }}"> {{request.GET.gallons}} </label>
+        {{ form.gallons }}
+    <script>
+        document.getElementById("id_delivery_address").value = "{{ user.userprofile.address }} {{ user.userprofile.city }} {{ user.userprofile.state }}";
+        document.getElementById("id_gallons").readOnly = true;
+        document.getElementById("id_delivery_address").readOnly = true;
+        document.getElementById("id_total_due").readOnly = true;
+    </script>
+    
+    <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</body>
+{% endblock %}
+</html>
