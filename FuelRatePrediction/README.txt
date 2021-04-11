@@ -32,4 +32,9 @@ http://127.0.0.1:8000/fqf/ for fuel quote form
 and
 http://127.0.0.1:8000/fqh/ for fuel quote History
 
-4. to run the code coverage go to the directory Group-12-COSC4353\FuelRatePrediction\FuelRatePredSys\tests and run the command pytest --cov=.
+Install:
+pip install pytest
+pip install pytest-django
+pip install pytest-cov
+
+4. to run the code coverage go to the directory Group-12-COSC4353\FuelRatePrediction and run the command pytest --cov=.
