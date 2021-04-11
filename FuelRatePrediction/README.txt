@@ -26,15 +26,4 @@ Starting development server at http://127.0.0.1:8000/
 
 3: Paste the http://127.0.0.1:8000/ ip into a browser Url to look at our website
 
-NOTE: currenlty we do not have links from the main pages linking the fuel quote page and fuel quote history:
-that comes later. so to connect to them Please use the IPs:
-http://127.0.0.1:8000/fqf/ for fuel quote form 
-and
-http://127.0.0.1:8000/fqh/ for fuel quote History
-
-Install:
-pip install pytest
-pip install pytest-django
-pip install pytest-cov
-
 4. to run the code coverage go to the directory Group-12-COSC4353\FuelRatePrediction and run the command pytest --cov=.
