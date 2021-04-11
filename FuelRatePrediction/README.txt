@@ -8,6 +8,7 @@ the IP on a browser. Here is how to do that
 pip install django
 pip install crispy-forms-gds
 pip install django-readonly-field
+
 For code coverage:
 pip install pytest
 pip install pytest-django
